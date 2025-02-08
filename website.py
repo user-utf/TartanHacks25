@@ -11,10 +11,9 @@ def index():
 
 @app.route('/random')
 def hello():
-    print("random")
-    url = collection.get_image(collection.random_item())
-    print("R",url)
-    return render_template("index.html",img_url=url)
+    data = collection.get_image(collection.random_item())
+    print(data)
+    return render_template("index.html",img_url=data[0], title = data[1], artist = data[2], department = data[3])
 
 if __name__ == '__main__':
     app.run()
