@@ -17,7 +17,7 @@ def random():
 @app.route('/department<dep>')
 def department(dep):
     print(dep)
-    data = collection.random_image_from_dep(dep)
+    data = collection.random_image_from_dep_name(dep)
     return render_template("index.html",img_url=data[0], title = data[1], artist = data[2], department = data[3], medium = data[4], artist_photo = data[5], descriptions = data[6])
 
 @app.route('/similar<info>')
@@ -30,6 +30,12 @@ def similarity(info):
 def artist(info):
     data = collection.same_artist(info)
     return render_template("index.html",img_url=data[0], title = data[1], artist = data[2], department = data[3], medium = data[4], artist_photo = data[5], descriptions = data[6])
+
+@app.route('/quiz.html')
+def quiz():
+    data = collection.quiz()
+    return render_template("quiz.html",img_url=data[0], title = data[1])
+
 
 if __name__ == '__main__':
     app.run()
