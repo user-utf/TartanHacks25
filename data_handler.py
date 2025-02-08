@@ -3,7 +3,7 @@ import random
 import requests
 
 class data_handler:
-    def __init__(self, file_name, categories = ["Arms and Armor","Egyptian Art", "Greek and Roman Art", "Asian Art"]) -> None:
+    def __init__(self, file_name, categories = ["Arms and Armor","Egyptian Art", "Greek and Roman Art", "Asian Art", "Islamic Art", "Modern and Contemporary Art"]) -> None:
         self.df = self.read(file_name, categories)
         self.shape = self.df.shape
         self.header = self.df.columns
@@ -12,7 +12,8 @@ class data_handler:
 
     def read(self, file_name, categories):
         data = pd.read_csv(file_name, delimiter=',',low_memory=False)
-        data = data.dropna(subset=["Artist Wikidata URL", "Object Wikidata URL"])
+        print(data)
+        data = data.dropna(subset=["Artist Wikidata URL", "Object Wikidata URL"], how='any')
         data = data[data["Is Public Domain"]]
         data = data[data["Department"].isin(categories)]
         return data
@@ -25,8 +26,8 @@ class data_handler:
 
         start = reply[class_start:].find('https://upload.wikimedia.org')
         end = reply[class_start+start:].find('"')
-        print(reply[class_start+start:class_start+start+end])
-
+        return reply[class_start+start:class_start+start+end]
+#{{ img_url }}"
 
     def get_item(self, idx):
         return self.df.iloc[idx]
