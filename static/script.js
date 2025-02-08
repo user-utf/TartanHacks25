@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.onload = function() {
         document.getElementById("loadingscreen").classList.remove("load");
-        if (document.getElementById("artist-pic").src.indexOf("no") != -1 || !document.getElementById("artist-pic").src) {
-            document.getElementById("artist-box").classList.add("hide");
+        if (document.getElementById("artist-pic").src.slice(-2) == "no" || !document.getElementById("artist-pic").src) {
+            document.getElementById("artist-pic").classList.add("hide");
         }
         if (document.getElementById("artist-desc").innerHTML == "no" || !document.getElementById("artist-desc").src) {
             document.getElementById("artist-desc").classList.add("hide");
