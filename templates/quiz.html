@@ -3,55 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>TartanHacks25</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}"></head>
 <body>
 <header class="title-header">
     <div class="header-left">
-        <img src="title.jpg" alt="artwork" width="75" height="75">
+        <img src="{{ url_for('static', filename='title.jpg')}}" alt="artwork" width="75" height="75">
         <div class="title">
             <h1 id="title">VIRTUAL MUSEUM</h1>
         </div>
     </div>
     <div class="nav-box">
-            <div class="home">
-                <a href="index.html">
-                    <button class="homebtn">Homepage</button>
-                </a>
-            </div>
+        <div class="home">
+            <a href="./">
+                <button class="homebtn">Homepage</button>
+            </a>
+        </div>
     </div>
 </header>
 
 <header class="work-header">
-    <h2>NAME OF WORK</h2>
+    <h2>{{ title }}</h2>
 </header>
 
 <div class="main-container">
     <div class="col-1">
         <div class="button-box">
             <div>
-                <button onclick="location.href='./quiz.html<0,{{qwb}}|{{score}}>'">Rembrandt</button>
+                <button onclick="location.href='./quiz.html<0,{{qwb}}|{{score}}|{{num}}>'">Rembrandt</button>
             </div>
             <div>
-                <button onclick="location.href='./quiz.html<1,{{qwb}}|{{score}}>'">Auguste Renoir</button>
+                <button onclick="location.href='./quiz.html<1,{{qwb}}|{{score}}|{{num}}>'">Auguste Renoir</button>
             </div>
             <div>
-                <button onclick="location.href='./quiz.html<2,{{qwb}}|{{score}}>'">Paul Cézanne</button>
+                <button onclick="location.href='./quiz.html<2,{{qwb}}|{{score}}|{{num}}>'">Paul Cézanne</button>
             </div>
             <div>
-                <button onclick="location.href='./quiz.html<3,{{qwb}}|{{score}}>'">Vincent van Gogh</button>
+                <button onclick="location.href='./quiz.html<3,{{qwb}}|{{score}}|{{num}}>'">Vincent van Gogh</button>
             </div>
         </div>
     </div>
     <div class="col-2">
         <div class="image-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Armchair_MET_DP341697.jpg" alt="artwork" class="artwork">
+            <img src="{{ img_url }}" alt="artwork" class="artwork">
         </div>
-        <p class="style">STYLE/YEAR or PERIOD</p>
+        <p class="style">European Paintings</p>
     </div>
     <div class="col-3">
         <h3 class="quizstats">How well do you know European Artists?</h3>
-        <h3 class="quizstats">Question x</h3>
-        <h3 class="quizstats">Score: x</h3>
+        <h3 class="quizstats">Question #{{ num }}</h3>
+        <h3 class="quizstats">Score: {{ score }}/{{ num2 }}</h3>
     </div>
 </div>

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>TartanHacks25</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
 </head>
 <body>
 <header class="title-header">
     <div class="header-left">
-        <img src="title.jpg" alt="artwork" width="75" height="75">
+        <img src="{{ url_for('static', filename='title.jpg')}}" alt="artwork" width="75" height="75">
         <div class="title">
             <h1 id="title">VIRTUAL MUSEUM</h1>
         </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="quiz">
-                <a href="quiz.html">
+                <a href="quiz.html<0>">
                     <button class="quizbtn">Test Yourself</button>
                 </a>
             </div>
@@ -39,7 +39,7 @@
 </header>
 
 <header class="work-header">
-    <h2>NAME OF WORK</h2>
+    <h2>{{ title }}</h2>
 </header>
 
 <div class="main-container">
@@ -52,37 +52,38 @@
                 <button class="leftbuttons" onclick="location.href='./similar<{{ department}}|{{ medium}} >'">Give Me Something Similar</button>
             </div>
             <div>
-                <button class="leftbuttons" onclick="location.href='./artist'">Something Else by artist name</button>
+                <button class="leftbuttons" onclick="location.href='./artist<{{ department}}|{{artist}}>'">Something Else by {{ artist }}</button>
             </div>
             <div>
                 <button class="leftbuttons" onclick="location.href='./department<{{ department }}>'">Keep Exploring department</button>
             </div>
         </div>
     </div>
+
     <div class="col-2">
         <div class="image-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Armchair_MET_DP341697.jpg" alt="artwork" class="artwork">
+            <img src="{{ img_url }}" alt="artwork" class="artwork">
         </div>
-      <p class="style">STYLE/YEAR or PERIOD</p>
+      <p class="style">{{ department }}</p>
     </div>
     <div class="col-3">
-      <h3>An Overview</h3>
-      <div class="overview">
-      <b>Medium</b><span>: </span><span>medium</span><br>
-      <b>Year</b><span>: </span><span>year</span> 
+    <h3>An Overview</h3>
+    <div class="overview">
+    <b>Medium</b><span>: </span><span>{{ medium }}</span><br>
+    <b>Year</b><span>: </span><span>{{ year }}</span> 
     </div>
     <h3>Artist</h3>
-      <p class="artist-name">NAME HERE</p>
+      <p class="artist-name">{{ artist }}</p>
       <div id="artist-box" class="artist-box">
-        <img id="artist-pic" src="picasso.jpg" alt="artist" class="artist">
+        <img id="artist-pic" src="{{ artist_photo }}" alt="artist" class="artist">
       </div>
-      <p id="artist-desc" class="artist-desc">DESCRIPTION HERE</p>
+      <p id="artist-desc" class="artist-desc">{{descriptions}}</p>
     </div>
 </div>
 
 <div id="loadingscreen" class="loadingscreen">
 </div>
 
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='script.js')}}"></script>
 </body>
 </html>
