@@ -139,7 +139,7 @@ button:hover {
     background-color: #f6f6f6;
 }
 
-.quizbtn, .dropbtn {
+.quizbtn, .dropbtn, .homebtn {
     border: none;
     background-color: #e90128;
     color: #FFF;
@@ -149,10 +149,19 @@ button:hover {
     font-size: 18px;
 }
 
-.quiz, .dropdown {
+.quizbtn:hover, .dropbtn:hover, .homebtn:hover {
+    text-decoration: underline;
+    background-color: #e90128;
+}
+
+.quiz, .dropdown, .home {
     height: 40px;
     padding: 0px;
     margin: 0px;
+}
+
+.quizstats {
+    margin: 20px
 }
 
 
