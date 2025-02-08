@@ -76,9 +76,9 @@ class data_handler:
         if not pd.isnull(data["Artist Wikidata URL"]):
             artist_photo = self.get_url(data["Artist Wikidata URL"])
             descriptions = self.get_description(data["Artist Wikidata URL"])
-
         url = self.get_url(data["Object Wikidata URL"])
-        
+        if artist_photo == "":
+            artist_photo = "no"
         if url == "":
             if cat == -1:
                 return self.get_image(self.random_item())
@@ -163,9 +163,12 @@ class data_handler:
     
     def quiz(self,info):
         score = 0
+        num = 1
         if info != "<0>":
             info = info[1:-1]
-            [res,score] = info.split("|")
+            [res,score, num] = info.split("|")
+            num = int(num)
+            num+=1
             res = res.split(",")
             score = int(score)
             print("RESULT COMPARISON:", res)
@@ -178,6 +181,7 @@ class data_handler:
         print(data)
         data.append(artist)
         data.append(score)
+        data.append(num)
         return data
 
 
