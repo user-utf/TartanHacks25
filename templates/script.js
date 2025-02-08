@@ -44,5 +44,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.onload = function() {
         document.getElementById("loadingscreen").classList.remove("load");
+        if (document.getElementById("artist-pic").src == no) {
+            document.getElementById("artist-box").add("hide");
+        } else {
+            document.getElementById("artist-box").remove("hide");
+        }
+        if (document.getElementById("artist-desc").innerHTML == "no") {
+            document.getElementById("artist-desc").add("hide");
+        } else {
+            document.getElementById("artist-desc").remove("hide");
+        }
     };    
 });
