@@ -31,6 +31,11 @@ button {
     font-family: "Liter";
 }
 
+.leftbuttons {
+    height: fit-content;
+    min-height: 50px;
+}
+
 .title {
     margin-top: 13px;
     margin-left: 10px;
@@ -139,7 +144,7 @@ button:hover {
     background-color: #f6f6f6;
 }
 
-.quizbtn, .dropbtn {
+.quizbtn, .dropbtn, .homebtn {
     border: none;
     background-color: #e90128;
     color: #FFF;
@@ -149,12 +154,81 @@ button:hover {
     font-size: 18px;
 }
 
-.quiz, .dropdown {
+.dropbtn {
+    width: 60.28px;
+}
+
+.quizbtn:hover, .dropbtn:hover, .homebtn:hover {
+    text-decoration: underline;
+    background-color: #e90128;
+}
+
+.quiz, .dropdown, .home {
     height: 40px;
     padding: 0px;
     margin: 0px;
 }
 
+.dropdown {
+    position: relative;
+    width: 60.28px;
+}
+
+.quizstats {
+    margin: 20px
+}
+
+.dropdown-content {
+    display: none;
+}
+
+.dropdown-content.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.select {
+    background-color: #ba0120;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 50px;
+    color: #FFF;
+    background-color: #e90128;
+    width: 190px;
+}
+
+.clear-filter, .filter-option {
+    width: 100%;
+    font-size: 14px;
+    background-color: #e90128;
+    padding: 4px 8px;
+    color: #fff;
+    margin: 0px;
+    border: none;
+    border-radius: 0px;
+    height: 45px;
+    text-align: left;
+}
+
+.clear-filter:hover, .filter-option:hover {
+    background-color: #ba0120;
+}
+
+.loadingscreen {
+    position: absolute;
+    z-index: 500;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+.loading {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.5;
+}
 
 /* * {
     margin: 0;
