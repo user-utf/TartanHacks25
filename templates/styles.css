@@ -31,6 +31,11 @@ button {
     font-family: "Liter";
 }
 
+.leftbuttons {
+    height: fit-content;
+    min-height: 50px;
+}
+
 .title {
     margin-top: 13px;
     margin-left: 10px;
@@ -149,6 +154,10 @@ button:hover {
     font-size: 18px;
 }
 
+.dropbtn {
+    width: 60.28px;
+}
+
 .quizbtn:hover, .dropbtn:hover, .homebtn:hover {
     text-decoration: underline;
     background-color: #e90128;
@@ -160,10 +169,52 @@ button:hover {
     margin: 0px;
 }
 
+.dropdown {
+    position: relative;
+    width: 60.28px;
+}
+
 .quizstats {
     margin: 20px
 }
 
+.dropdown-content {
+    display: none;
+}
+
+.dropdown-content.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.select {
+    background-color: #ba0120;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 50px;
+    color: #FFF;
+    background-color: #e90128;
+    width: 190px;
+}
+
+.clear-filter, .filter-option {
+    width: 100%;
+    font-size: 14px;
+    background-color: #e90128;
+    padding: 4px 8px;
+    color: #fff;
+    margin: 0px;
+    border: none;
+    border-radius: 0px;
+    height: 45px;
+    text-align: left;
+}
+
+.clear-filter:hover, .filter-option:hover {
+    background-color: #ba0120;
+}
 
 /* * {
     margin: 0;

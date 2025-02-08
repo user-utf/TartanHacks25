@@ -15,21 +15,19 @@
     </div>
     <div class="nav-box">
             <div class="dropdown">
-                <button class="dropbtn">Filter</button>
-                <div class="dropdown-content">
-                    <!-- <a href="#">Clear Filters</a>
-                    <a href="#">The American Wing</a>
-                    <a href="#">Modern and Contemporary Art</a>
-                    <a href="#">Arms and Armor</a>
-                    <a href="#">Asian Art</a> -->
+                <button class="dropbtn" id="dropbtn">Filter</button>
+                <div class="dropdown-content" id="dropdown-content">
+                    <button class="clear-filter" id="filter0">Clear Filters</button>
+                    <button class="filter-option" id="filter1">The American Wing</button>
+                    <button class="filter-option" id="filter2">Modern and Contemporary Art</button>
+                    <button class="filter-option" id="filter3">Arms and Armor</button>
                 </div>
             </div>
             <div class="quiz">
                 <a href="quiz.html">
                     <button class="quizbtn">Test Yourself</button>
                 </a>
-            </div>        
-            
+            </div>
     </div>
 </header>
 
@@ -41,16 +39,16 @@
     <div class="col-1">
         <div class="button-box">
             <div>
-                <button onclick="location.href='./random'">I'm Feeling Lucky</button>
+                <button class="leftbuttons" onclick="location.href='./random'">I'm Feeling Lucky</button>
             </div>
             <div>
-                <button onclick="location.href='./similar<{{ department}}|{{ medium}} >'">Give Me Something Similar</button>
+                <button class="leftbuttons" onclick="location.href='./similar<{{ department}}|{{ medium}} >'">Give Me Something Similar</button>
             </div>
             <div>
-                <button onclick="location.href='./artist'">Something Else by artistname</button>
+                <button class="leftbuttons" onclick="location.href='./artist'">Something Else by artist name</button>
             </div>
             <div>
-                <button onclick="location.href='./department<{{ department }}>'">Keep Exploring department</button>
+                <button class="leftbuttons" onclick="location.href='./department<{{ department }}>'">Keep Exploring department</button>
             </div>
         </div>
     </div>
@@ -71,3 +69,6 @@
       <p class="artist-desc">DESCRIPTION HERE</p>
     </div>
 </div>
+<script src="script.js"></script>
+</body>
+</html>
