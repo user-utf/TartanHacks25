@@ -32,7 +32,7 @@ button {
 }
 
 .leftbuttons {
-    height: fit-content;
+    height: max-content;
     min-height: 50px;
 }
 
@@ -187,7 +187,7 @@ button:hover {
     flex-direction: column;
 }
 
-.select {
+.filter-option.select {
     background-color: #ba0120;
 }
 
@@ -222,6 +222,10 @@ button:hover {
     width: 100vw;
     height: 100vh;
     display: none;
+}
+
+.loadingscreen.load {
+    display: block;
 }
 
 .loading {

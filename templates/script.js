@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     let filters = document.querySelectorAll(".filter-option");
     let filterreset = document.getElementById("filter0");
-    let selectedFilters = new Set();
+    let whitebuttons = document.querySelectorAll(".leftbuttons");
 
     function noneSelected() {
         for (let filter of filters) {
@@ -28,12 +28,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         filters.forEach(filter => {
             if (filter.contains(event.target)) {
-                console.log("Help");
                 filter.classList.toggle("select");
             }
         });
         if (noneSelected()) {
             filterreset.classList.add("select");
         }
+        whitebuttons.forEach(buttons => {
+            if (buttons.contains(event.target)) {
+                console.log("help");
+                document.getElementById("loadingscreen").classList.add("load");
+            }
+        });
     })
+
+    window.onload = function() {
+        document.getElementById("loadingscreen").classList.remove("load");
+    };    
 });
