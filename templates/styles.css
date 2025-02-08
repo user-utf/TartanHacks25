@@ -42,6 +42,12 @@ button {
     background-color: #e90128;
     color: #FFF;
     padding: 10px;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: row;
 }
 
 .main-container {
@@ -58,6 +64,13 @@ button {
     margin-top: 10px;
 }
 
+.nav-box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 0px;
+}
+
 .col-2 {
     display: flex;
     flex-direction: column;
@@ -72,6 +85,7 @@ button {
 .image-box {
     height: min(430px, calc(70vh - 40px));
     min-height: 300px;
+    max-width: 650px;
     width: calc(60vw - 60px);
     min-width: 320px;
     display: flex;
@@ -124,6 +138,23 @@ button {
 button:hover {
     background-color: #f6f6f6;
 }
+
+.quizbtn, .dropbtn {
+    border: none;
+    background-color: #e90128;
+    color: #FFF;
+    margin: 7px;
+    width: fit-content;
+    height: fit-content;
+    font-size: 18px;
+}
+
+.quiz, .dropdown {
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+}
+
 
 /* * {
     margin: 0;
