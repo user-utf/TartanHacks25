@@ -7,7 +7,8 @@ collection = data_handler('MetObjects.csv')
 
 @app.route("/")
 def index():
-    return render_template("index.html",img_url="https://upload.wikimedia.org/wikipedia/commons/c/c0/Douglas_adams_portrait_cropped.jpg")
+    #https://upload.wikimedia.org/wikipedia/commons/c/c0/Douglas_adams_portrait_cropped.jpg
+    return render_template("index.html",img_url="https://images.metmuseum.org/CRDImages/as/original/DP130155.jpg", title = "Under the Wave off Kanagawa, also known as The Great Wave", artist = "Katsushika Hokusai", department = "Asian Art", medium = "Pentaptych of woodblock prints; ink and color on paper", artist_photo = "https://upload.wikimedia.org/wikipedia/commons/1/1c/Hokusai_as_an_old_man.jpg", descriptions = "Japanese artist (1760-1849)", year = "1831")
 
 @app.route('/random')
 def random():
@@ -34,7 +35,7 @@ def artist(info):
 @app.route('/quiz.html<info>')
 def quiz(info):
     data = collection.quiz(info)
-    return render_template("quiz.html",img_url=data[0], title = data[1], qwb = data[2], score = data[3])
+    return render_template("quiz.html",img_url=data[0], title = data[1], qwb = data[2], score = data[3], num = data[4], num2 = data[4]-1)
 
 
 if __name__ == '__main__':
