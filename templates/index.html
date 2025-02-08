@@ -21,6 +21,18 @@
                     <button class="filter-option" id="filter1">The American Wing</button>
                     <button class="filter-option" id="filter2">Modern and Contemporary Art</button>
                     <button class="filter-option" id="filter3">Arms and Armor</button>
+                    <button class="filter-option" id="filter4">Costume Institute</button>
+                    <button class="filter-option" id="filter5">European Sculpture and Decorative Arts</button>
+                    <button class="filter-option" id="filter6">Greek and Roman Art</button>
+                    <button class="filter-option" id="filter7">Photographs</button>
+                    <button class="filter-option" id="filter8">Arts of Africa, Oceania, and the Americas</button>
+                    <button class="filter-option" id="filter9">Drawings and Prints</button>
+                    <button class="filter-option" id="filter10">European Paintings</button>
+                    <button class="filter-option" id="filter11">Islamic Art</button>
+                    <button class="filter-option" id="filter12">Robert Lehman Collection</button>
+                    <button class="filter-option" id="filter13">The Cloisters' 'Musical Instruments</button>
+                    <button class="filter-option" id="filter14">Egyptian Art</button>
+                    <button class="filter-option" id="filter15">The Libraries</button>
                 </div>
             </div>
             <div class="quiz">
@@ -39,7 +51,7 @@
     <div class="col-1">
         <div class="button-box">
             <div>
-                <button class="leftbuttons" onclick="location.href='./random'">I'm Feeling Lucky</button>
+                <button class="leftbuttons" onclick="location.href='index.html'">I'm Feeling Lucky</button>
             </div>
             <div>
                 <button class="leftbuttons" onclick="location.href='./similar<{{ department}}|{{ medium}} >'">Give Me Something Similar</button>
@@ -60,8 +72,11 @@
     </div>
     <div class="col-3">
       <h3>An Overview</h3>
-      <p>Text Here</p>
-      <h3>Artist</h3>
+      <div class="overview">
+      <b>Medium</b><span>: </span><span>medium</span><br>
+      <b>Year</b><span>: </span><span>year</span> 
+    </div>
+    <h3>Artist</h3>
       <p class="artist-name">NAME HERE</p>
       <div class="artist-box">
         <img src="picasso.jpg" alt="artist" class="artist">
@@ -71,7 +86,6 @@
 </div>
 
 <div id="loadingscreen" class="loadingscreen">
-    <img class="loading" src="loading.jpg">
 </div>
 
 <script src="script.js"></script>

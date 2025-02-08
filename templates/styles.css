@@ -217,21 +217,22 @@ button:hover {
 }
 
 .loadingscreen {
-    position: absolute;
-    z-index: 500;
-    width: 100vw;
-    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
     display: none;
+    z-index: 9999;
 }
 
 .loadingscreen.load {
     display: block;
 }
 
-.loading {
-    width: 100vw;
-    height: 100vh;
-    opacity: 0.5;
+.overview {
+    margin: 16px;
 }
 
 /* * {
