@@ -7,9 +7,26 @@
 </head>
 <body>
 <header class="title-header">
-    <img src="title.jpg" alt="artwork" width="75" height="75">
-    <div class="title">
-        <h1 id="title">VIRTUAL MUSEUM</h1>
+    <div class="header-left">
+        <img src="title.jpg" alt="artwork" width="75" height="75">
+        <div class="title">
+            <h1 id="title">VIRTUAL MUSEUM</h1>
+        </div>
+    </div>
+    <div class="nav-box">
+            <div class="quiz">
+                <button class="quizbtn">Test Yourself</button>
+            </div>        
+            <div class="dropdown">
+                <button class="dropbtn">Filter</button>
+                <div class="dropdown-content">
+                    <!-- <a href="#">Clear Filters</a>
+                    <a href="#">The American Wing</a>
+                    <a href="#">Modern and Contemporary Art</a>
+                    <a href="#">Arms and Armor</a>
+                    <a href="#">Asian Art</a> -->
+                </div>
+            </div>
     </div>
 </header>
 
@@ -20,18 +37,18 @@
 <div class="main-container">
     <div class="col-1">
         <div class="button-box">
-        <div>
-            <button onclick="location.href='./random'">I'm Feeling Lucky</button>
-        </div>
-        <div>
-            <button onclick="location.href='./similar'">Give Me Something Similar</button>
-        </div>
-        <div>
-            <button onclick="location.href='./artist'">Something Else by artistname</button>
-        </div>
-        <div>
-            <button onclick="location.href='./department'">Keep Exploring department</button>
-        </div>
+            <div>
+                <button onclick="location.href='./random'">I'm Feeling Lucky</button>
+            </div>
+            <div>
+                <button onclick="location.href='./similar<{{ department}}|{{ medium}} >'">Give Me Something Similar</button>
+            </div>
+            <div>
+                <button onclick="location.href='./artist'">Something Else by artistname</button>
+            </div>
+            <div>
+                <button onclick="location.href='./department<{{ department }}>'">Keep Exploring department</button>
+            </div>
         </div>
     </div>
     <div class="col-2">
