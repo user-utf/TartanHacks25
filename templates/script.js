@@ -28,9 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         filters.forEach(filter => {
             if (filter.contains(event.target)) {
+                console.log("Help");
                 filter.classList.toggle("select");
-            } else {
-                filter.classList.remove("select");
             }
         });
         if (noneSelected()) {
