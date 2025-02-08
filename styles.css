@@ -6,16 +6,25 @@ body {
     min-width: 748px;
     min-height: 600px;
     font-family: "Liter";
+    margin: 0;
+}
+
+h1 {
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .title {
-    margin-top: 34px
+    margin-top: 35px;
+    margin-left: 10px;
 }
 
 .title-header {
     display: flex;
     flex-direction: row;
-    color: #e90128;
+    background-color: #e90128;
+    color: #FFF;
+    padding: 20px;
 }
 
 .main-container {
