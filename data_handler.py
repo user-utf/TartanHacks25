@@ -5,8 +5,10 @@ import re
 import json
 
 class data_handler:
-    def __init__(self, file_name, categories = ["The Cloisters","Arms and Armor","Egyptian Art", "Greek and Roman Art", "Asian Art", "Islamic Art", "Modern and Contemporary Art", "European Paintings", "Musical Instruments", "Arts of Africa, Oceania, and the Americas","European Sculpture and Decorative Arts"]) -> None:
+    def __init__(self, file_name, categories = ["The Cloisters","Arms and Armor","Egyptian Art", "Greek and Roman Art", "Asian Art", "Islamic Art", "Modern and Contemporary Art", "European Paintings", "Musical Instruments", "Arts of Africa, Oceania, and the Americas","European Sculpture and Decorative Arts"], quiz_names = ["Rembrandt", "Renoir", "Cézanne", "Gogh"]) -> None:
         self.dfs = self.read(file_name, categories)
+        self.quiz = [self.dfs[7][self.dfs[7]["Artist Display Name"].str.contains(name)] for name in quiz_names] 
+        self.quiz_names = quiz_names
         self.categories = categories
         self.elements = ["Title"]
 
@@ -21,7 +23,14 @@ class data_handler:
         return out
 
     def get_url(self, base):
-        base = base.replace("|","")
+        if "https:" not in base:
+            return "no"
+        if base[0] == "|":
+            base = base[1:]
+        print("Base URL:", base)
+        base = base.split("|")[0]
+        print("Parsed URL:", base)
+
         reply = requests.get(base).text
 
         class_start = reply.find('<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/')
@@ -43,7 +52,7 @@ class data_handler:
 
 
 
-    def get_image(self, data):
+    def get_image(self, data, cat = -1):
         artist_photo = "no"
         descriptions = "no"
         print(data["Artist Wikidata URL"])
@@ -55,7 +64,10 @@ class data_handler:
         url = self.get_url(data["Object Wikidata URL"])
         
         if url == "":
-            return self.get_image(self.random_item())
+            if cat == -1:
+                return self.get_image(self.random_item())
+            else:
+                return self.random_image_from_dep(cat)
         # print(rtn,reply[class_start:class_start+start+end+10])
         pattern = re.compile(r'[^a-zA-Z0-9\s.,;:!?()\"\'\-]')
         filter = pattern.sub('', data["Title"]).replace("　","")
@@ -76,14 +88,18 @@ class data_handler:
         index = random.randint(0, len(self.dfs[cat])-1)
         # print(index)
         return self.get_item(cat, index)
-    
-    def random_image_from_dep(self, dep):
+
+    def random_image_from_dep(self, cat):
+        print("Random IMG from Dep:", self.categories[cat],cat)
+        index = random.randint(0, len(self.dfs[cat])-1)
+        return self.get_image(self.get_item(cat, index),cat)
+
+    def random_image_from_dep_name(self, dep):
         if dep[1:-1] not in self.categories:
             print("NOT FOUND CAT \n\n")
             return self.get_image(self.random_item())
         cat = self.categories.index(dep[1:-1])
-        index = random.randint(0, len(self.dfs[cat])-1)
-        return self.get_image(self.get_item(cat, index))
+        return self.random_image_from_dep(cat)
 
     def find_with_medium(self, dep, medium):
         medium = medium[:-1]
