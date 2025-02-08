@@ -93,7 +93,7 @@ class data_handler:
         else:
             split = split[0]
         title = re.sub("[\(\[].*?[\)\]]", "", split)
-        return [url, title, data["Artist Display Name"].split("|")[0], data["Department"],data["Medium"], artist_photo, descriptions]
+        return [url, title, data["Artist Display Name"].split("|")[0], data["Department"],data["Medium"], artist_photo, descriptions, data["Object Date"]]
 
     def get_item(self, category, idx):
         return self.dfs[category].iloc[idx]
@@ -161,12 +161,24 @@ class data_handler:
 
         return self.get_image(data)
     
-    def quiz(self):
+    def quiz(self,info):
+        score = 0
+        if info != "<0>":
+            info = info[1:-1]
+            [res,score] = info.split("|")
+            res = res.split(",")
+            score = int(score)
+            print("RESULT COMPARISON:", res)
+            score += (res[0] == res[1])
         artist = random.randint(0, len(self.quiz_list)-1)
         # print(cat,self.categories[cat],len(self.dfs[cat]))
         index = random.randint(0, len(self.quiz_list[artist])-1)
         print("QUIZ:",self.quiz_list[artist].iloc[index])
-        return self.get_quiz_image(self.quiz_list[artist].iloc[index])
+        data = self.get_quiz_image(self.quiz_list[artist].iloc[index])
+        print(data)
+        data.append(artist)
+        data.append(score)
+        return data
 
 
 
