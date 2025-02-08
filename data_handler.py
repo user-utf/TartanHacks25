@@ -2,6 +2,7 @@ import pandas as pd
 import random
 import requests
 import re
+import json
 
 class data_handler:
     def __init__(self, file_name, categories = ["The Cloisters","Arms and Armor","Egyptian Art", "Greek and Roman Art", "Asian Art", "Islamic Art", "Modern and Contemporary Art", "European Paintings", "Musical Instruments", "Arts of Africa, Oceania, and the Americas","European Sculpture and Decorative Arts"]) -> None:
@@ -15,32 +16,56 @@ class data_handler:
         data = data.dropna(subset=["Object Wikidata URL","Title","Artist Display Name","Medium"], how='any')
         data = data[data["Is Public Domain"]]
         self.header = data.columns
-        # print(data["Department"].unique())
-        # print(data[data["Department"] == '"Arts of Africa, Oceania, and the Americas"'])
+
         out = [data[data["Department"] == cat] for cat in categories]
-        # print(len(out[8]))
         return out
 
-    def get_image(self, data):
-        url = data["Object Wikidata URL"]
-        # print(data)
-        # print(data["Medium"])
-        # print(data["Artist Wikidata URL"])
-        # print(data["Artist Display Bio"])
-        reply = requests.get(url).text
+    def get_url(self, base):
+        base = base.replace("|","")
+        reply = requests.get(base).text
 
         class_start = reply.find('<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/')
 
         start = reply[class_start:].find('https://upload.wikimedia.org')
         end = reply[class_start+start:].find('"')
-        rtn = reply[class_start+start:class_start+start+end]
-        if rtn == "":
+        return reply[class_start+start:class_start+start+end]
+
+    def get_description(self, base):
+        ID = base[base.rfind("/")+1:]
+        # print(ID)
+        text = requests.get("https://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + ID + "&format=json").text
+        # print(text)
+        reply = json.loads(text)
+        try:
+            return reply["entities"][ID]["descriptions"]["en"]["value"]
+        except KeyError:
+            return "no"  
+
+
+
+    def get_image(self, data):
+        artist_photo = "no"
+        descriptions = "no"
+        print(data["Artist Wikidata URL"])
+        print(data["Object Wikidata URL"])
+        if not pd.isnull(data["Artist Wikidata URL"]):
+            artist_photo = self.get_url(data["Artist Wikidata URL"])
+            descriptions = self.get_description(data["Artist Wikidata URL"])
+
+        url = self.get_url(data["Object Wikidata URL"])
+        
+        if url == "":
             return self.get_image(self.random_item())
-        print(rtn,reply[class_start:class_start+start+end+10])
+        # print(rtn,reply[class_start:class_start+start+end+10])
         pattern = re.compile(r'[^a-zA-Z0-9\s.,;:!?()\"\'\-]')
         filter = pattern.sub('', data["Title"]).replace("　","")
-
-        return [rtn, filter, data["Artist Display Name"].split("|")[0], data["Department"],data["Medium"]]
+        split = filter.split('"')
+        if len(split) > 1:
+            split = split[1]
+        else:
+            split = split[0]
+        split = re.sub("[\(\[].*?[\)\]]", "", split)
+        return [url, split, data["Artist Display Name"].split("|")[0], data["Department"],data["Medium"], artist_photo, descriptions]
 
     def get_item(self, category, idx):
         return self.dfs[category].iloc[idx]
@@ -54,6 +79,7 @@ class data_handler:
     
     def random_image_from_dep(self, dep):
         if dep[1:-1] not in self.categories:
+            print("NOT FOUND CAT \n\n")
             return self.get_image(self.random_item())
         cat = self.categories.index(dep[1:-1])
         index = random.randint(0, len(self.dfs[cat])-1)
@@ -65,7 +91,6 @@ class data_handler:
         valid = self.dfs[dep][mask]
         idx = random.randint(0, len(valid)-1)
         return valid.iloc[idx]
-
 
     def similar(self, info):
         info = info[1:-1]
@@ -79,6 +104,28 @@ class data_handler:
         cat = self.categories.index(dep)
 
         data = self.find_with_medium(cat, medium)
+
+        return self.get_image(data)
+    
+    def find_with_artist(self, dep, artist):
+        artist = artist[:-1]
+        mask = self.dfs[dep]["Artist Display Name"].str.contains(artist)
+        valid = self.dfs[dep][mask]
+        print(valid,artist)
+        idx = random.randint(0, len(valid)-1)
+        return valid.iloc[idx]
+    
+    def same_artist(self, info):
+        info = info[1:-1]
+        [dep, artist] = info.split("|")
+
+        if dep not in self.categories:
+            print("NOT FOUND\n\n")
+            return self.get_image(self.random_item())
+        
+        cat = self.categories.index(dep)
+
+        data = self.find_with_artist(cat, artist)
 
         return self.get_image(data)
 
