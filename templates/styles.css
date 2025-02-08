@@ -216,6 +216,20 @@ button:hover {
     background-color: #ba0120;
 }
 
+.loadingscreen {
+    position: absolute;
+    z-index: 500;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+.loading {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.5;
+}
+
 /* * {
     margin: 0;
     padding: 0;
