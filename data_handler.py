@@ -7,7 +7,7 @@ import json
 class data_handler:
     def __init__(self, file_name, categories = ["The Cloisters","Arms and Armor","Egyptian Art", "Greek and Roman Art", "Asian Art", "Islamic Art", "Modern and Contemporary Art", "European Paintings", "Musical Instruments", "Arts of Africa, Oceania, and the Americas","European Sculpture and Decorative Arts"], quiz_names = ["Rembrandt", "Renoir", "Cézanne", "Gogh"]) -> None:
         self.dfs = self.read(file_name, categories)
-        self.quiz = [self.dfs[7][self.dfs[7]["Artist Display Name"].str.contains(name)] for name in quiz_names] 
+        self.quiz_list = [self.dfs[7][self.dfs[7]["Artist Display Name"].str.contains(name)] for name in quiz_names] 
         self.quiz_names = quiz_names
         self.categories = categories
         self.elements = ["Title"]
@@ -51,6 +51,22 @@ class data_handler:
             return "no"  
 
 
+    def get_quiz_image(self, data):
+        url = self.get_url(data["Object Wikidata URL"])
+        
+        if url == "":
+            return self.get_image(self.random_item())
+        
+        pattern = re.compile(r'[^a-zA-Z0-9\s.,;:!?()\"\'\-]')
+        filter = pattern.sub('', data["Title"]).replace("　","")
+        split = filter.split('"')
+        if len(split) > 1:
+            split = split[1]
+        else:
+            split = split[0]
+        title = re.sub("[\(\[].*?[\)\]]", "", split)
+        return [url, title]
+
 
     def get_image(self, data, cat = -1):
         artist_photo = "no"
@@ -76,8 +92,8 @@ class data_handler:
             split = split[1]
         else:
             split = split[0]
-        split = re.sub("[\(\[].*?[\)\]]", "", split)
-        return [url, split, data["Artist Display Name"].split("|")[0], data["Department"],data["Medium"], artist_photo, descriptions]
+        title = re.sub("[\(\[].*?[\)\]]", "", split)
+        return [url, title, data["Artist Display Name"].split("|")[0], data["Department"],data["Medium"], artist_photo, descriptions, data["Object Date"]]
 
     def get_item(self, category, idx):
         return self.dfs[category].iloc[idx]
@@ -144,6 +160,25 @@ class data_handler:
         data = self.find_with_artist(cat, artist)
 
         return self.get_image(data)
+    
+    def quiz(self,info):
+        score = 0
+        if info != "<0>":
+            info = info[1:-1]
+            [res,score] = info.split("|")
+            res = res.split(",")
+            score = int(score)
+            print("RESULT COMPARISON:", res)
+            score += (res[0] == res[1])
+        artist = random.randint(0, len(self.quiz_list)-1)
+        # print(cat,self.categories[cat],len(self.dfs[cat]))
+        index = random.randint(0, len(self.quiz_list[artist])-1)
+        print("QUIZ:",self.quiz_list[artist].iloc[index])
+        data = self.get_quiz_image(self.quiz_list[artist].iloc[index])
+        print(data)
+        data.append(artist)
+        data.append(score)
+        return data
 
 
 
